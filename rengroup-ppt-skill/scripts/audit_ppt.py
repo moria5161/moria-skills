@@ -1,4 +1,4 @@
-"""Audit a PPTX against the Ren Group presentation style."""
+"""按任组演示文稿规范审计 PPTX。"""
 
 import argparse
 import re
@@ -11,7 +11,7 @@ from pptx.enum.shapes import MSO_SHAPE_TYPE, PP_PLACEHOLDER
 from pptx.enum.text import PP_ALIGN
 
 
-DEFAULT_TEMPLATE = Path(__file__).resolve().parents[1] / "assets" / "任组PPT模板.pptx"
+DEFAULT_TEMPLATE = Path(__file__).resolve().parents[1] / "assets" / "RenGroup-PPT-template.pptx"
 BLACK = "000000"
 WHITE = "FFFFFF"
 EMU_PER_INCH = 914400
@@ -22,8 +22,16 @@ def parse_args():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("pptx", type=Path)
     parser.add_argument("--template", type=Path, default=DEFAULT_TEMPLATE,
-                        help="Template used to derive title and conclusion-frame colors.")
+                        help="用于读取标题色和结论框颜色的模板。")
     return parser.parse_args()
+
+
+def configure_console():
+    """避免 Windows 的 GBK 控制台因不间断空格等字符而崩溃。"""
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure:
+            reconfigure(encoding="utf-8", errors="replace")
 
 
 def template_colors(template_path):
@@ -86,6 +94,16 @@ def iter_runs(shape):
                 yield paragraph, run
 
 
+def contains_cjk(text):
+    """仅识别真正的中日韩统一表意文字，避免把 NBSP 等符号误判为中文。"""
+    return any(
+        "\u3400" <= char <= "\u4dbf"
+        or "\u4e00" <= char <= "\u9fff"
+        or "\uf900" <= char <= "\ufaff"
+        for char in text
+    )
+
+
 def within(inner, outer):
     return (
         inner.left >= outer.left
@@ -104,22 +122,22 @@ def audit(path, title_color, conclusion_color):
         titles = [shape for shape in slide.shapes if is_title(shape)]
         if slide_no > 1:
             if not titles:
-                errors.append(f"Slide {slide_no}: no title placeholder found.")
+                errors.append(f"第 {slide_no} 页：未找到标题占位符。")
             for title in titles:
                 center_offset = abs((title.left + title.width / 2) - sw / 2) / EMU_PER_INCH
                 if center_offset > 0.25 or title.top > 1.15 * EMU_PER_INCH:
-                    errors.append(f"Slide {slide_no}: title is not centered at the top.")
+                    errors.append(f"第 {slide_no} 页：标题未位于顶部居中位置。")
                 for paragraph in title.text_frame.paragraphs:
                     if paragraph.text.strip() and paragraph.alignment != PP_ALIGN.CENTER:
-                        warnings.append(f"Slide {slide_no}: title alignment is not explicitly centered.")
+                        warnings.append(f"第 {slide_no} 页：标题未显式设置为居中对齐。")
                     for run in paragraph.runs:
                         if not run.text.strip():
                             continue
                         color = explicit_rgb(run.font.color)
                         if color is None:
-                            warnings.append(f"Slide {slide_no}: title color is inherited; confirm the template resolves it to #{title_color}.")
+                            warnings.append(f"第 {slide_no} 页：标题颜色来自继承，请确认模板最终解析为 #{title_color}。")
                         elif color != title_color:
-                            errors.append(f"Slide {slide_no}: title color is #{color}, expected template color #{title_color}.")
+                            errors.append(f"第 {slide_no} 页：标题颜色为 #{color}，模板要求 #{title_color}。")
 
         red_frames = []
         for shape in slide.shapes:
@@ -131,34 +149,34 @@ def audit(path, title_color, conclusion_color):
                         shape.left >= sw * 0.48 and shape.top >= sh * 0.45
                     )
                     if not low_enough:
-                        errors.append(f"Slide {slide_no}: conclusion frame is not at the bottom or lower-right.")
+                        errors.append(f"第 {slide_no} 页：结论框不在底部或右下区域。")
                     if shape.fill.type is not None:
                         fill_color = explicit_fill_rgb(shape.fill)
                         if fill_color not in (None, WHITE):
-                            errors.append(f"Slide {slide_no}: conclusion frame must have no fill.")
+                            errors.append(f"第 {slide_no} 页：结论框必须无填充。")
 
         conclusion_text = [
             shape for shape in slide.shapes
             if getattr(shape, "has_text_frame", False) and "结论" in shape.text
         ]
         if conclusion_text and not red_frames:
-            errors.append(f"Slide {slide_no}: conclusion text has no template-color #{conclusion_color} conclusion frame.")
+            errors.append(f"第 {slide_no} 页：结论文字缺少模板色 #{conclusion_color} 的结论框。")
         for text_shape in conclusion_text:
             containing = [frame for frame in red_frames if within(text_shape, frame)]
             if not containing:
-                warnings.append(f"Slide {slide_no}: conclusion text is not fully inside the conclusion frame.")
+                warnings.append(f"第 {slide_no} 页：结论文字未完全位于结论框内。")
             for _, run in iter_runs(text_shape):
                 color = explicit_rgb(run.font.color)
                 if color not in (None, BLACK):
-                    errors.append(f"Slide {slide_no}: conclusion text must be black.")
+                    errors.append(f"第 {slide_no} 页：结论文字必须为黑色。")
                 if run.font.size and not 20 <= run.font.size.pt <= 24:
-                    errors.append(f"Slide {slide_no}: conclusion text is {run.font.size.pt:g} pt; expected 20–24 pt.")
+                    errors.append(f"第 {slide_no} 页：结论文字为 {run.font.size.pt:g} pt，应为 20–24 pt。")
 
         for shape in slide.shapes:
             text = getattr(shape, "text", "").strip()
             if slide_no > 1 and text and DATE_RE.search(text):
                 if shape.left < sw * 0.45 and shape.top > sh * 0.72:
-                    errors.append(f"Slide {slide_no}: lower-left date/time marker is not allowed.")
+                    errors.append(f"第 {slide_no} 页：内容页左下角不允许出现日期或时间标记。")
 
             if shape.shape_type == MSO_SHAPE_TYPE.PICTURE:
                 try:
@@ -166,7 +184,7 @@ def audit(path, title_color, conclusion_color):
                         px_w, px_h = shape.image.size
                         ppi = min(px_w / (shape.width / EMU_PER_INCH), px_h / (shape.height / EMU_PER_INCH))
                         if ppi < 150:
-                            warnings.append(f"Slide {slide_no}: image '{shape.name}' is only {ppi:.0f} ppi at display size.")
+                            warnings.append(f"第 {slide_no} 页：图片“{shape.name}”在当前显示尺寸下仅有 {ppi:.0f} ppi。")
                 except (AttributeError, ZeroDivisionError):
                     pass
 
@@ -175,33 +193,33 @@ def audit(path, title_color, conclusion_color):
                     for cell in row.cells:
                         fill_color = explicit_fill_rgb(cell.fill) if cell.fill.type is not None else None
                         if fill_color not in (None, WHITE):
-                            errors.append(f"Slide {slide_no}: table cells must not use colored fills.")
+                            errors.append(f"第 {slide_no} 页：表格单元格不得使用彩色填充。")
                         for paragraph in cell.text_frame.paragraphs:
                             for run in paragraph.runs:
                                 if run.text.strip() and run.font.size and not 14 <= run.font.size.pt <= 16:
-                                    errors.append(f"Slide {slide_no}: table text is {run.font.size.pt:g} pt; expected 14–16 pt.")
+                                    errors.append(f"第 {slide_no} 页：表格文字为 {run.font.size.pt:g} pt，应为 14–16 pt。")
 
             if is_title(shape) or slide_no == 1:
                 continue
             for _, run in iter_runs(shape):
                 size = run.font.size.pt if run.font.size else None
                 if size is not None and size < 12:
-                    errors.append(f"Slide {slide_no}: text '{run.text[:24]}' is below 12 pt.")
+                    errors.append(f"第 {slide_no} 页：文字“{run.text[:24]}”小于 12 pt。")
                 elif size is not None and 16 < size < 20:
-                    warnings.append(f"Slide {slide_no}: text '{run.text[:24]}' is {size:g} pt; use 14–16 or 20–24 pt by role.")
+                    warnings.append(f"第 {slide_no} 页：文字“{run.text[:24]}”为 {size:g} pt；请按角色使用 14–16 或 20–24 pt。")
                 elif size is not None and size > 24:
-                    warnings.append(f"Slide {slide_no}: non-title text '{run.text[:24]}' exceeds 24 pt.")
+                    warnings.append(f"第 {slide_no} 页：非标题文字“{run.text[:24]}”超过 24 pt。")
 
-                has_cn = any(ord(char) > 127 for char in run.text)
+                has_cn = contains_cjk(run.text)
                 has_en = bool(re.search(r"[A-Za-z]", run.text))
                 font = run.font.name
                 if font is None:
-                    warnings.append(f"Slide {slide_no}: font for '{run.text[:24]}' is inherited; set it explicitly.")
+                    warnings.append(f"第 {slide_no} 页：文字“{run.text[:24]}”的字体来自继承，请显式设置。")
                 else:
                     if has_cn and font not in ("黑体", "SimHei"):
-                        errors.append(f"Slide {slide_no}: Chinese text uses '{font}', expected 黑体.")
+                        errors.append(f"第 {slide_no} 页：中文文字使用“{font}”，应使用黑体。")
                     if has_en and font != "Arial":
-                        errors.append(f"Slide {slide_no}: English text uses '{font}', expected Arial.")
+                        errors.append(f"第 {slide_no} 页：英文文字使用“{font}”，应使用 Arial。")
 
             if getattr(shape, "has_chart", False):
                 chart = shape.chart
@@ -210,13 +228,13 @@ def audit(path, title_color, conclusion_color):
                         axis = getattr(chart, axis_name)
                         size = axis.tick_labels.font.size
                         if size and size.pt < 12:
-                            errors.append(f"Slide {slide_no}: {axis_name} tick labels are below 12 pt.")
+                            errors.append(f"第 {slide_no} 页：{axis_name} 刻度标签小于 12 pt。")
                     except (AttributeError, ValueError):
                         pass
                 try:
                     size = chart.legend.font.size
                     if size and not 14 <= size.pt <= 16:
-                        errors.append(f"Slide {slide_no}: chart legend is {size.pt:g} pt; expected 14–16 pt.")
+                        errors.append(f"第 {slide_no} 页：图例为 {size.pt:g} pt，应为 14–16 pt。")
                 except (AttributeError, ValueError):
                     pass
 
@@ -224,15 +242,16 @@ def audit(path, title_color, conclusion_color):
 
 
 def main():
+    configure_console()
     args = parse_args()
     title_color, conclusion_color = template_colors(args.template)
-    print(f"Template colors: title #{title_color}, conclusion frame #{conclusion_color}")
+    print(f"模板颜色：标题 #{title_color}，结论框 #{conclusion_color}")
     errors, warnings = audit(args.pptx, title_color, conclusion_color)
     for message in warnings:
-        print("WARN:", message)
+        print("警告：", message)
     for message in errors:
-        print("ERROR:", message)
-    print(f"Audit complete: {len(errors)} error(s), {len(warnings)} warning(s).")
+        print("错误：", message)
+    print(f"审计完成：{len(errors)} 个错误，{len(warnings)} 个警告。")
     sys.exit(1 if errors else 0)
 
 

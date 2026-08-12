@@ -1,5 +1,5 @@
 interface:
   display_name: "任组 PPT"
-  short_description: "Create polished Ren Group academic presentations"
+  short_description: "使用任组模板创建规范、清晰的学术演示文稿"
   brand_color: "#800000"
-  default_prompt: "Use $rengroup-ppt-skill to create a clean academic presentation with the Ren Group template."
+  default_prompt: "使用 $rengroup-ppt-skill 和内置任组模板创建一份规范、清晰并经过逐页质检的学术演示文稿。"

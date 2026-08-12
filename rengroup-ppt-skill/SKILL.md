@@ -1,55 +1,56 @@
 ---
 name: rengroup-ppt-skill
-description: Create, edit, restyle, and review Ren Group (任组/课题组) academic PowerPoint presentations using the bundled group template and house style. Use for .pptx slide decks, thesis defenses, group meetings, research reports, method/result presentations, or any request that asks for an 任组 PPT or requires the Ren Group template, typography, charts, tables, conclusion boxes, and visual QA rules.
+description: 使用技能内置的任组模板和组内视觉规范，创建、编辑、重排、润色和审查任组（课题组）学术 PowerPoint。适用于 .pptx 幻灯片、博士或硕士答辩、组会、科研汇报、方法与结果展示，以及任何要求使用任组模板、字体、图表、表格、结论框和逐页视觉质检规范的演示文稿任务。
 ---
 
-# Ren Group PPT
+# 任组学术 PPT
 
-Create research presentations that look like they were prepared inside the group, not from a generic slide generator.
+创建具有任组统一风格的科研演示文稿，避免通用幻灯片生成器的模板感。
 
-## Required resources
+## 必须使用的资源
 
-- Start from `assets/任组PPT模板.pptx`. Preserve its slide size, master, page-number treatment, and reusable layouts.
-- If the user supplies a newer 任组 template, that file overrides the bundled asset. Its title and conclusion-frame colors take precedence over all numeric fallback values in this skill.
-- Read `references/style-guide.md` completely before creating or editing slides.
-- Read `references/template-map.md` when choosing or duplicating template slides.
-- Use the general PPTX editing workflow and tools available in the environment for unpacking, editing, rendering, and validation.
+- 始终从 `assets/RenGroup-PPT-template.pptx` 开始，保留其 16:9 页面尺寸、母版、彩色分隔线、页码和可复用版式。
+- 如果用户提供更新的任组模板，以用户文件为准；其母版、字体、标题色和结论框样式覆盖本技能中的数值回退规则。
+- 创建或编辑幻灯片前，完整阅读 `references/style-guide.md`。
+- 选择或复制模板页时，完整阅读 `references/template-map.md`。
+- 按环境中的通用 PPTX 工作流检查母版与版式、编辑继承元素、渲染全部页面并完成视觉质检。
 
-## Workflow
+## 工作流程
 
-1. Inspect the source material and identify the presentation purpose, audience, and main scientific claim.
-2. Build a concise storyline. Prefer `problem → method → evidence → interpretation → conclusion` for research reports.
-3. Analyze the bundled template with thumbnails and text extraction before selecting layouts.
-4. Map content to varied template layouts. Duplicate template slides rather than rebuilding the visual system from scratch.
-5. Replace every placeholder, sample image, citation, `xxx`, and example conclusion. Remove unused placeholder shapes completely.
-6. Apply the house style below and the full rules in `references/style-guide.md`.
-7. Run `python scripts/audit_ppt.py output.pptx`. When a newer template is supplied, add `--template path/to/new-template.pptx`.
-8. Extract text to check content and render every slide to images for visual QA. Fix issues and repeat the audit after at least one revision cycle.
+1. 检查原始材料，明确汇报目的、受众、时长和主要科学结论。
+2. 建立简洁叙事。科研汇报优先采用“问题 → 方法 → 证据 → 解释 → 结论”。
+3. 对模板逐页渲染并提取文字，确认 10 个示例页、母版、占位符和可复用元素。
+4. 将内容映射到适合的模板页。优先复制原页并编辑继承元素，不要脱离模板重建视觉系统。
+5. 替换所有示例标题、图片、表格、引文、`xxx`、省略号和示例结论；完全删除不用的占位符。
+6. 应用下列硬性规范以及 `references/style-guide.md` 中的完整规则。
+7. 运行 `python scripts/audit_ppt.py output.pptx`。若使用用户提供的新模板，追加 `--template path/to/new-template.pptx`。
+8. 提取最终文字并逐页渲染，检查内容完整性、版式和视觉问题。至少修订一轮后再次运行审计。
 
-## Non-negotiable house style
+## 不可妥协的组内规范
 
-- Use 黑体 for Chinese and Arial for English, including charts, legends, tables, labels, citations, and annotations. Split mixed-language runs when necessary.
-- Center every content-slide title at the top. Inherit the template title color (`#800000`). Never place the title at the upper left.
-- Use 20–24 pt for the main narrative and conclusion statements.
-- Use 14–16 pt for legends, annotations, citations, table text, and text inside figures. Keep chart-axis text at least 12 pt.
-- Put a slide-level conclusion on result and discussion slides in a lower-right or bottom conclusion box. Duplicate the template conclusion shape so its no-fill treatment and `#C00000` outline are preserved; use black 20–24 pt text.
-- Keep tables unfilled and visually light. Use only necessary thin rules; do not apply colored header fills.
-- Prefer SVG/vector artwork. Use high-resolution raster images without stretching; keep chart labels readable at presentation scale.
-- Keep content-slide backgrounds clean and consistent with the template. Do not add decorative gradients, dark panels, sand backgrounds, or unrelated motifs.
-- Do not add a research date or project date in the lower-left corner of content slides. A cover date is allowed only when requested or required by the template.
-- Preserve whitespace. Do not shrink essential text below the specified size to make overcrowded content fit; split the slide instead.
+- 中文使用黑体，英文和数字使用 Arial；图表、图例、表格、标签、引文和批注同样适用。混合语言可拆分文本运行，或同时正确设置拉丁与东亚字体映射。
+- 内容页标题位于顶部居中，继承模板标题色 `#800000`；不要改为左上角标题。
+- 主叙述和结论通常使用 20–24 pt；模板内容页标题沿用 32 pt。
+- 图例、批注、引文、表格文字和图内文字使用 14–16 pt；坐标轴文字至少 12 pt。
+- 结果、对比、讨论和总结页应在底部或右下角给出页面级结论。复制模板的无填充、`#C00000` 红色虚线圆角框，并使用黑色 20–24 pt 文字。
+- 表格不使用单元格填充，表头也不使用彩色底纹；只保留阅读所需的细线。
+- 优先使用 SVG、EMF 或可编辑图表。位图必须有足够分辨率并保持纵横比，插入后图表文字仍须可读。
+- 内容页背景保持干净并与模板一致，不添加装饰性渐变、深色面板、沙色背景或无关主题元素。
+- 内容页左下角不得添加研究日期、项目日期或汇报时间；封面日期仅在用户要求或模板需要时保留。
+- 保留留白。内容过多时先精简或拆页，不能通过缩小关键文字强行塞入一页。
 
-## Scientific communication rules
+## 科学表达规则
 
-- Lead each slide with one scientific message, not a list of everything that was done.
-- Show evidence next to its interpretation. Keep captions close to their figure or table.
-- State uncertainty, sample size, validation design, and limitations where they affect the conclusion.
-- Use concise academic language. Avoid promotional wording and unsupported claims.
-- On comparison slides, make the baseline, proposed method, metric, and direction of improvement explicit.
+- 每页只推进一个科学信息，不要罗列所有已完成工作。
+- 证据与解释相邻放置，图注和引文靠近对应图表。
+- 当不确定性、样本量、验证设计和限制会影响结论时，必须明确说明。
+- 使用简洁的学术语言，避免宣传式表述和没有证据支持的结论。
+- 对比页必须说明基线、所提方法、评价指标及改善方向。
 
-## QA requirements
+## 质检要求
 
-- Treat `scripts/audit_ppt.py` warnings as items to inspect, not as permission to ignore them.
-- Check for title placement/color, font families and sizes, conclusion-frame styling, unfilled tables, image resolution, chart-axis readability, and unwanted bottom-left date text.
-- Inspect every rendered slide for overlap, clipping, inconsistent alignment, cramped blocks, stretched figures, low contrast, and leftover template content.
-- Do not deliver until the deck passes structural validation and a full visual pass reveals no new issues.
+- `scripts/audit_ppt.py` 的警告必须逐项人工核对，不能因其不是错误而直接忽略。
+- 检查标题位置与颜色、中文/英文字体、字号、结论框、表格填充、图片分辨率、坐标轴可读性和左下角日期。
+- 检查所有示例占位内容是否已清除，包括封面的姓名/日期、`xxx`、`图1–图4`、`表格`、示例引文、省略号和 `结论/总结1–3`。
+- 逐页检查重叠、裁切、意外换行、对齐不一致、拥挤、拉伸、低对比和残留模板内容。
+- 只有结构审计通过、全部页面已渲染检查且最新一轮未发现新问题后，才能交付。

@@ -1,89 +1,90 @@
-# 任组 PPT style guide
+# 任组 PPT 样式规范
 
-## Visual identity
+## 视觉识别
 
-| Element | Rule |
+| 元素 | 规则 |
 |---|---|
-| Template | Always use `assets/任组PPT模板.pptx` as the starting presentation |
-| Slide size | Preserve template size: 13.333 × 7.5 in (16:9) |
-| Title color | Template maroon `#800000` |
-| Conclusion outline | Template red `#C00000` |
-| Body color | Black `#000000` |
-| Background | Use the clean template background; do not invent decorative backgrounds |
-| Chinese font | 黑体 |
-| English font | Arial |
+| 模板 | 始终以 `assets/RenGroup-PPT-template.pptx` 为起始文件 |
+| 页面尺寸 | 保留模板的 13.333 × 7.5 英寸（16:9）尺寸 |
+| 标题色 | 模板深红 `#800000` |
+| 结论框 | 模板红色 `#C00000` |
+| 正文色 | 黑色 `#000000` |
+| 背景 | 使用模板白底和彩色分隔线，不另造装饰背景 |
+| 中文字体 | 黑体 |
+| 英文与数字字体 | Arial |
 
-The template is the source of truth for title color and conclusion-frame color. In the bundled version, preserve `#800000` for titles and duplicate the template conclusion frame so its `#C00000` outline treatment remains intact. If the user provides a newer template, inspect and inherit its colors instead of forcing these fallback values.
+模板是标题色、结论框、页码和彩色分隔线的最终依据。内置版本使用 `#800000` 标题和 `#C00000` 结论框；如果用户提供更新模板，应检查并继承新模板，而不是强制套用这些回退数值。
 
-## Typography
+## 字体与字号
 
-| Role | Size | Alignment and treatment |
+| 角色 | 字号 | 对齐与处理 |
 |---|---:|---|
-| Content-slide title | Inherit the template size unless adjustment is necessary | Top center, bold, template color `#800000` |
-| Main narrative | 20–24 pt | Prefer left alignment; use short statements |
-| Slide conclusion | 20–24 pt | Black text inside the conclusion frame |
-| Legend and annotation | 14–16 pt | Keep close to the related graphic |
-| Table content | 14–16 pt | Align by data type; avoid cramped cells |
-| Text inside figures | 14–16 pt | Regenerate the figure if embedded text is smaller |
-| Axis labels and ticks | At least 12 pt | Prefer 12–14 pt; never rely on post-scaling |
-| Citations and edge notes | 14–16 pt | Concise and visually secondary |
+| 封面标题 | 模板默认 32 pt，必要时在不破坏构图的前提下调整 | 居中、加粗、`#800000` |
+| 内容页标题 | 模板默认 32 pt | 顶部居中、加粗、`#800000`，保持单行 |
+| 主叙述 | 20–24 pt | 优先左对齐，使用短句 |
+| 页面结论 | 20–24 pt | 结论框内黑色文字 |
+| 图例与批注 | 14–16 pt | 靠近对应图形 |
+| 表格文字 | 14–16 pt | 按数据类型对齐，避免拥挤 |
+| 图内文字 | 14–16 pt | 若原图文字过小，应重新生成图，而不是只放大位图 |
+| 坐标轴标签与刻度 | 至少 12 pt | 推荐 12–14 pt，不依赖插入后的整体缩放 |
+| 引文和边缘说明 | 14–16 pt | 简洁、次要但可读 |
+| 页码 | 继承模板 14 pt | 右上角，不与标题冲突 |
 
-Set Chinese and English fonts explicitly. For mixed text such as `峰强比 Ratio`, use separate runs so Chinese is 黑体 and English is Arial.
+明确设置中文和英文的字体映射。混合文本（如“峰强比 Ratio”）可拆成不同文本运行，或在同一运行中同时设置东亚字体为黑体、拉丁字体为 Arial。
 
-## Slide title
+## 标题
 
-- Place each content-slide title in a full-width title box at the top center.
-- Use the title color inherited from the template (`#800000`).
-- Do not place section labels or titles in the upper-left corner.
-- Preserve the template separator if it is part of the master; do not add a second decorative title line.
-- Keep the title on one line when possible. Shorten it before shrinking it excessively.
+- 内容页标题使用模板的全宽标题占位符，位于顶部居中。
+- 保留模板的 `#800000` 颜色和 32 pt 字号；不要改成左上角章节标签。
+- 模板标题框顶部约为 `-7 pt`。不要继续上移；每次修改后都要渲染检查是否裁切。
+- 保持模板彩色分隔线，不再添加第二条装饰标题线。
+- 标题尽量保持单行。先精简文字或换用更合适的页面，再考虑缩小字号。
 
-## Conclusion frame
+## 结论框
 
-Use the frame on result, comparison, discussion, and summary slides when a page-level conclusion exists.
+结果、对比、讨论和总结页在存在页面级结论时使用结论框。
 
-- Position: bottom spanning the main content width, or lower-right when the layout requires it.
-- Border: duplicate the template frame and retain its `#C00000` outline color and line treatment.
-- Fill: none/transparent.
-- Text: black, 20–24 pt, concise, normally one or two lines.
-- Do not use a filled red callout, shadow, or glow. Preserve the template's rounded, dashed outline when duplicating its conclusion frame.
-- The conclusion must interpret the evidence on that slide; it must not merely repeat the title.
+- 位置：页面底部横跨主要内容区；特殊布局可置于右下角。
+- 边框：复制模板圆角框，保留 `#C00000`、2.25 pt、虚线样式。
+- 填充：无填充/透明。
+- 文字：黑色、20–24 pt，通常一至两行。
+- 不使用红色实心底、阴影或发光。
+- 结论必须解释本页证据及其意义，不能只是重复标题。
 
-## Figures and charts
+## 图片与图表
 
-- Prefer SVG, EMF, PDF-derived vector art, or editable native charts.
-- For raster figures, target at least 150 ppi at the displayed size; use 200–300 ppi for detailed spectra and microscopy images.
-- Never stretch an image non-proportionally.
-- Crop unused white margins before placement.
-- Use Arial for English chart text and 黑体 for Chinese chart text.
-- Use 14–16 pt for legends, annotations, and labels within the plotting area.
-- Keep axis labels and ticks at least 12 pt after insertion into the slide.
-- Use consistent line widths and colors across related plots.
-- Explain statistical bars, bands, symbols, and sample sizes when they affect interpretation.
+- 优先使用 SVG、EMF、PDF 转换的矢量图或可编辑原生图表。
+- 位图在最终显示尺寸下至少达到 150 ppi；复杂谱图和显微图像建议 200–300 ppi。
+- 不得非等比拉伸图片；放置前裁去无用白边。
+- 英文图表文字使用 Arial，中文使用黑体。
+- 绘图区内图例、批注和标签使用 14–16 pt；坐标轴标签和刻度在插入后至少 12 pt。
+- 同组图表保持线宽、颜色和符号一致。
+- 当误差线、置信带、显著性符号或样本量会影响解释时，必须说明其含义。
 
-## Tables
+## 表格
 
-- Use no cell fill, including the header row, unless the user explicitly requests emphasis.
-- Use thin black or neutral-gray rules only where needed for reading structure.
-- Keep 14–16 pt text and adequate cell padding.
-- Align numeric columns consistently and use the same number of decimal places within a metric.
-- Reduce columns, shorten headers, or split the table instead of shrinking text.
-- Use bold text, a slightly heavier rule, or spacing—not colored fills—to distinguish headers.
+- 默认所有单元格均无填充，包括表头；用户明确要求时除外。
+- 仅使用阅读结构所需的黑色或中性灰细线。
+- 使用 14–16 pt 文字并保留足够内边距。
+- 数值列统一对齐；同一指标保留相同小数位数。
+- 优先删减列、缩短表头或拆表，不要通过缩小文字塞入过多内容。
+- 用加粗、略粗分隔线或间距区分表头，不用彩色底纹。
 
-## Layout and density
+## 布局与密度
 
-- Use one main message per slide.
-- Keep at least 0.5 in outer margins and 0.3 in between independent blocks where the template allows.
-- Favor a dominant visual with supporting interpretation over many equally weighted boxes.
-- Use the three-panel layout for direct comparisons and the single-figure layout for a main result plus interpretation.
-- Avoid text-only result slides when a figure, spectrum, workflow, or compact table can carry the evidence.
-- Do not add a date, project timestamp, or study period in the lower-left corner of content slides.
+- 每页只表达一个主要信息。
+- 在模板允许时，外边距至少约 0.5 英寸，独立内容块之间至少约 0.3 英寸。
+- 优先使用一个主视觉配解释，不要堆放许多同等权重的方框。
+- 直接对比或三阶段流程使用第 4 页；窄图配解释使用第 6 页；宽图或表格配解释使用第 8 页。
+- 结果页应优先让图、谱图、流程或紧凑表格承载证据，避免纯文字结果页。
+- 内容页左下角不得增加日期、时间戳或研究周期。
 
-## Content checklist
+## 内容检查清单
 
-- Does the title state the topic clearly?
-- Is the result visible without reading the conclusion first?
-- Does the conclusion explain why the result matters?
-- Are sample size, uncertainty, and validation assumptions shown where relevant?
-- Are all placeholders and example citations removed?
-- Are abbreviations defined on first use?
+- 标题是否直接说明本页主题或结论？
+- 不先读结论框，观众是否也能看见关键结果？
+- 结论是否解释结果为何重要？
+- 相关页面是否给出样本量、不确定性和验证假设？
+- 所有占位符、示例引文、省略号和示例姓名/日期是否已删除？
+- 缩写是否在首次出现时定义？
+- 标题、页码和彩色分隔线是否完整且没有遮挡？

@@ -1,451 +1,146 @@
 ---
-
-name: apple-ui-design
-description: >
-Design, implement, review, and refine Apple-inspired web, desktop, and mobile
-interfaces. Use for Apple-style minimal UI, macOS/iOS visual language,
-translucent materials, fluid motion, premium landing pages, dashboards,
-settings panels, scientific software, and polished product interfaces.
-----------------------------------------------------------------------
-
-# Apple UI Design Skill
-
-## Goal
-
-Create interfaces that feel calm, precise, premium, coherent, and native.
-
-Do not merely copy Apple colors, blur effects, or rounded rectangles. Reproduce the deeper qualities of Apple interface design:
-
-* strong visual hierarchy
-* restrained decoration
-* generous whitespace
-* clear typography
-* spatial consistency
-* direct manipulation
-* immediate feedback
-* fluid, interruptible motion
-* progressive disclosure
-* accessibility by default
-
-The result should feel designed, not generated.
-
+name: apple-design
+description: 设计、实现、审查和优化受 Apple 设计语言启发的 Web、桌面端与移动端界面。适用于 Apple 风格极简 UI、macOS/iOS/iPadOS/SwiftUI、系统材质与半透明效果、流畅动效、高端产品页、仪表盘、设置面板、科研软件，以及需要改善层级、间距、交互状态、响应式和无障碍体验的产品界面。
 ---
 
-# 1. Working Process
+# Apple 风格界面设计
 
-For every UI task, follow this sequence.
+## 目标
 
-## Step 1: Understand the product
+创建冷静、精确、克制、连贯且具有平台原生感的界面。
 
-Determine:
+不要把 Apple 风格简化为圆角、模糊和灰白配色。应同时体现：
 
-* target platform: web, macOS, iOS, iPadOS, or responsive
-* main user goal
-* primary action
-* information hierarchy
-* expected content density
-* light mode, dark mode, or both
-* existing framework and component library
-* whether the request means Apple-inspired or truly native Apple UI
+- 清楚的视觉层级；
+- 克制的装饰和充足的留白；
+- 一致的空间、字体与控件体系；
+- 直接操作、即时反馈和可中断动效；
+- 渐进披露与默认无障碍；
+- 符合产品任务的内容密度。
 
-Do not start coding before identifying the primary user flow.
+最终结果应像经过推敲的产品，而不是套用效果的通用模板。
 
-## Step 2: Inspect the existing project
+## 工作流程
 
-Before modifying code:
+### 1. 明确产品任务
 
-* inspect the repository structure
-* identify the framework
-* identify existing components
-* inspect current typography, spacing, colors, and tokens
-* reuse existing dependencies where appropriate
-* avoid replacing the entire architecture unnecessarily
+开始实现前，确认：
 
-Preserve functional behavior unless the user explicitly asks for structural changes.
+- 目标平台：Web、macOS、iOS、iPadOS 或响应式多端；
+- 用户的核心目标、主流程和首要操作；
+- 信息层级与预期内容密度；
+- 是否需要浅色、深色或两种外观；
+- 现有框架、组件库和设计令牌；
+- 用户需要“受 Apple 启发”的原创界面，还是严格遵循 Apple 平台规范的原生界面。
 
-## Step 3: Establish a design direction
+不要在主流程不清楚时直接编码。
 
-Summarize internally:
+### 2. 检查现有项目
 
-* visual character
-* layout structure
-* typography hierarchy
-* surface hierarchy
-* interaction model
-* motion language
+修改代码前：
 
-Use one coherent direction. Do not mix Apple, Material Design, cyberpunk, glassmorphism, and generic dashboard styles.
+- 检查仓库结构、框架、现有组件和构建命令；
+- 识别当前字体、间距、颜色、圆角和动效令牌；
+- 优先复用已安装的依赖和图标体系；
+- 保留现有业务行为，除非用户明确要求结构性改造；
+- 不要为视觉改造无故替换应用架构或框架。
 
-## Step 4: Implement
+### 3. 确立单一设计方向
 
-Build the complete interface, not an isolated visual mockup.
+在实现前形成一致的内部判断：视觉气质、布局骨架、字体层级、表面层级、交互模型和动效语言。
 
-Include:
+不要混用 Apple、Material Design、赛博朋克、重度玻璃拟态和通用 SaaS 仪表盘风格。
 
-* responsive layout
-* empty states
-* loading states
-* hover, focus, pressed, selected, disabled states
-* keyboard interaction
-* reduced-motion handling
-* light/dark appearance where relevant
+### 4. 完整实现
 
-## Step 5: Review
+交付可运行界面，而不是只有静态外观的局部样稿。根据任务覆盖：
 
-Before finishing, inspect:
+- 响应式布局；
+- 空状态、加载状态和错误状态；
+- 默认、悬停、按下、聚焦、选中、禁用和加载中的控件状态；
+- 键盘操作、触控目标和屏幕阅读器语义；
+- `prefers-reduced-motion`；
+- 适用时的浅色与深色模式。
 
-* alignment
-* spacing rhythm
-* contrast
-* typography hierarchy
-* component consistency
-* interaction feedback
-* responsive behavior
-* accessibility
-* unnecessary visual effects
-* generic AI-generated patterns
+### 5. 运行并检查成品
 
-Refine until the interface looks intentional.
+在可行时启动或构建项目，并检查真实渲染结果。至少复核：
 
----
+- 对齐、间距节奏和留白；
+- 字体层级、换行和可读性；
+- 对比度、聚焦状态和键盘路径；
+- 控件状态与操作反馈；
+- 移动端和桌面端布局；
+- 溢出、裁切、遮挡和不必要的视觉效果。
 
-# 2. Core Design Principles
+发现问题后修正并重新检查。未查看真实渲染结果时，不要声称界面已经精修完成。
 
-## Clarity
+## 核心设计原则
 
-Every screen must have an obvious purpose.
+### 清晰
 
-The user should quickly understand:
+每个页面都应让用户快速理解：当前位置、重要信息、下一步操作，以及操作之后发生了什么。
 
-* where they are
-* what information matters
-* what they can do next
-* what changed after an action
+优先通过层级、位置和邻近关系表达结构，不要依赖过多边框、标签或卡片。
 
-Use visual hierarchy rather than excessive labels and borders.
+### 内容优先
 
-## Deference
+导航、控件、背景和效果应服务内容。装饰不得争夺注意力，也不得降低科研数据、表格或长文本的可读性。
 
-Content is more important than decoration.
+### 有意义的深度
 
-Navigation, controls, backgrounds, and effects should support the content rather than compete with it.
+只在需要表达层级、临时状态或空间关系时使用材质、阴影、缩放和动效。玻璃效果是一种材料，不是整套主题。
 
-## Depth
+### 克制与一致
 
-Use layering, motion, scale, translucency, and shadows to communicate relationships.
+减少但强化设计决策。统一间距、圆角、控件高度、字体、图标、表面和过渡；相似元素必须具有相似行为。
 
-Depth must explain structure. It must not exist only for decoration.
+## 布局与间距
 
-## Restraint
+优先建立明确的空间区域：导航、页面标题或工具栏、主要内容、次要详情，以及确有必要的持续操作。
 
-Prefer fewer, stronger decisions.
+- 阅读型内容建议最大宽度约 `720px`；
+- 仪表盘和编辑器建议最大宽度约 `1200px`；
+- 沉浸式工具可使用全宽，但正文不要横跨过宽页面；
+- 使用 4 点或 8 点间距体系，例如 `4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96`；
+- 建立共享对齐线，重视基线、左边缘、光学居中和垂直节奏；
+- 卡片只用于有明确对象边界或交互边界的内容，不要把每段文字都装入卡片；
+- 不要默认把所有内容居中。
 
-Avoid:
+## 字体
 
-* too many cards
-* excessive gradients
-* excessive blur
-* decorative glows
-* oversized headings everywhere
-* unnecessary badges
-* excessive borders
-* multiple competing accent colors
-* animations on every element
-
-## Consistency
-
-Similar elements must behave similarly.
-
-Use consistent:
-
-* spacing
-* corner radii
-* control heights
-* icon style
-* typography
-* transitions
-* surface treatment
-
----
-
-# 3. Layout System
-
-## Page structure
-
-Prefer clear spatial zones:
-
-1. navigation
-2. page title or contextual toolbar
-3. primary content
-4. secondary details
-5. persistent actions only when necessary
-
-Do not put every section inside a separate card.
-
-Use cards only when the content represents a meaningful object, group, or interactive unit.
-
-## Content width
-
-For reading-focused pages:
+Web 界面优先使用系统字体栈，不要打包或分发 Apple 专有字体文件：
 
 ```css
-max-width: 720px;
+font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+  "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
 ```
 
-For product dashboards and editors:
-
-```css
-max-width: 1200px;
-```
-
-For immersive tools:
-
-```css
-width: 100%;
-```
-
-Allow content to breathe. Do not stretch text paragraphs across very wide screens.
-
-## Spacing scale
-
-Use a consistent 4-point or 8-point spacing system.
-
-Recommended scale:
+可按内容密度调整以下参考层级：
 
 ```text
-4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96
+大展示标题  48–72 px
+页面标题    32–44 px
+章节标题    22–28 px
+卡片标题    17–20 px
+正文        15–17 px
+次要文字    13–15 px
+说明文字    11–13 px
 ```
 
-Typical usage:
+- 常用字重为 400、500、600；700 应少量使用；
+- 正文行高通常为 `1.45–1.65`；
+- 大标题可使用约 `-0.02em` 的轻微负字距；
+- 用少量语义化的透明度层级代替大量互不相关的灰色；
+- 关键信息必须满足可访问对比度。
 
-```text
-4–8 px     icon/text adjustment
-8–12 px    compact internal spacing
-12–16 px   control spacing
-16–24 px   card padding
-24–32 px   section spacing
-40–64 px   major content separation
-64–96 px   page-level breathing room
-```
+## 颜色与材质
 
-Avoid arbitrary values unless alignment requires optical correction.
+从中性表面和单一主强调色开始。强调色主要用于主操作、链接、选中状态、活动控件和进度，不要给每个图标和标题着色。
 
-## Alignment
+语义色只在传达含义时使用，并同时配合文字、形状、图标或状态变化，不能只靠颜色表达状态。
 
-Use strong shared alignment lines.
-
-Prefer:
-
-* aligned text baselines
-* consistent left edges
-* balanced optical centering
-* even vertical rhythm
-* logical grouping through proximity
-
-Do not center all content by default.
-
----
-
-# 4. Typography
-
-## Font stack
-
-For web interfaces, use:
-
-```css
-font-family:
-  -apple-system,
-  BlinkMacSystemFont,
-  "SF Pro Display",
-  "SF Pro Text",
-  "Helvetica Neue",
-  Arial,
-  sans-serif;
-```
-
-Do not bundle or distribute Apple proprietary font files.
-
-Use the system font stack so Apple devices render the native system typeface.
-
-## Typography hierarchy
-
-Suggested scale:
-
-```text
-Large display: 48–72 px
-Page title:    32–44 px
-Section title: 22–28 px
-Card title:    17–20 px
-Body:          15–17 px
-Secondary:     13–15 px
-Caption:       11–13 px
-```
-
-Use smaller sizes for dense desktop tools and larger sizes for marketing pages.
-
-## Weight
-
-Prefer:
-
-```text
-400 regular
-500 medium
-600 semibold
-700 bold, used sparingly
-```
-
-Avoid making all headings heavy.
-
-## Line height
-
-Recommended:
-
-```text
-Display: 1.05–1.15
-Heading: 1.15–1.3
-Body:    1.45–1.65
-Caption: 1.3–1.5
-```
-
-## Tracking
-
-Large headings may use slightly tighter tracking:
-
-```css
-letter-spacing: -0.02em;
-```
-
-Small uppercase labels may use slightly wider tracking, but avoid overusing uppercase text.
-
-## Text color
-
-Use hierarchy through opacity rather than many unrelated gray values.
-
-Example:
-
-```css
---text-primary: rgba(0, 0, 0, 0.88);
---text-secondary: rgba(0, 0, 0, 0.58);
---text-tertiary: rgba(0, 0, 0, 0.38);
-```
-
-Dark mode:
-
-```css
---text-primary: rgba(255, 255, 255, 0.92);
---text-secondary: rgba(255, 255, 255, 0.62);
---text-tertiary: rgba(255, 255, 255, 0.40);
-```
-
-Ensure accessible contrast for essential content.
-
----
-
-# 5. Color System
-
-## Base palette
-
-Start with neutral surfaces.
-
-Light mode example:
-
-```css
-:root {
-  --background: #f5f5f7;
-  --surface: rgba(255, 255, 255, 0.72);
-  --surface-solid: #ffffff;
-  --surface-elevated: rgba(255, 255, 255, 0.88);
-
-  --text-primary: rgba(0, 0, 0, 0.88);
-  --text-secondary: rgba(0, 0, 0, 0.58);
-  --text-tertiary: rgba(0, 0, 0, 0.38);
-
-  --separator: rgba(0, 0, 0, 0.10);
-  --border-subtle: rgba(0, 0, 0, 0.08);
-
-  --accent: #0071e3;
-  --accent-hover: #0077ed;
-}
-```
-
-Dark mode example:
-
-```css
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-    --surface: rgba(28, 28, 30, 0.72);
-    --surface-solid: #1c1c1e;
-    --surface-elevated: rgba(44, 44, 46, 0.88);
-
-    --text-primary: rgba(255, 255, 255, 0.92);
-    --text-secondary: rgba(255, 255, 255, 0.62);
-    --text-tertiary: rgba(255, 255, 255, 0.40);
-
-    --separator: rgba(255, 255, 255, 0.14);
-    --border-subtle: rgba(255, 255, 255, 0.10);
-
-    --accent: #0a84ff;
-    --accent-hover: #409cff;
-  }
-}
-```
-
-## Accent color
-
-Use one primary accent color.
-
-Accent color should indicate:
-
-* primary actions
-* links
-* selected state
-* active controls
-* progress
-
-Do not color every icon and heading.
-
-## Semantic colors
-
-Use semantic colors only when they communicate meaning:
-
-```text
-blue    action or selection
-green   success
-orange  warning
-red     destructive action or error
-gray    inactive or secondary
-```
-
-Never rely on color alone. Pair color with text, shape, icon, or state change.
-
----
-
-# 6. Surfaces and Materials
-
-## Solid surfaces
-
-Use solid surfaces for:
-
-* dense data tables
-* forms
-* reading content
-* high-contrast information
-* accessibility-critical content
-
-## Translucent surfaces
-
-Use translucency for:
-
-* toolbars
-* floating controls
-* sidebars
-* overlays
-* navigation bars
-* sheets
-* temporary contextual layers
-
-Example:
+半透明材质适用于工具栏、侧边栏、悬浮控件、导航栏、浮层和临时上下文。密集表格、表单、正文和高对比信息应优先使用实色表面。
 
 ```css
 .glass-surface {
@@ -456,347 +151,40 @@ Example:
 }
 ```
 
-Dark mode:
+必须为不支持 `backdrop-filter` 的环境提供实色回退。不要堆叠多层模糊，也不要在复杂图片上放低对比半透明文字。
 
-```css
-.glass-surface {
-  background: rgba(30, 30, 32, 0.68);
-  border-color: rgba(255, 255, 255, 0.10);
-}
-```
+建议在单个产品内只使用少量圆角值，例如 `8px`、`12px`、`16px`、`24px` 和胶囊值 `999px`。阴影应柔和、低透明，并只用于需要表达悬浮层级的对象。
 
-Provide a fallback background when `backdrop-filter` is unsupported.
+## 控件与导航
 
-## Glass usage rules
+- 常规触控目标至少约 `44 × 44px`；密集桌面工具可在保证可用性的前提下适度收紧；
+- 输入框必须有可见标签、明确聚焦和验证反馈，不能只依赖占位符；
+- 开关只用于立即生效的二元设置；需要确认或高风险的操作不要使用开关；
+- 分段控件用于少量互斥视图，标签要短，通常不超过约 5 项；
+- 菜单应与触发器对齐、支持键盘、清楚区分破坏性操作并可预测地关闭；
+- 侧边栏适合稳定的一级目的地，桌面宽度通常为 `220–280px`；
+- 标签页只用于同一上下文中的同级内容；面包屑只用于真实层级结构。
 
-Do not:
+每个交互控件都应根据需要提供默认、悬停、按下、`focus-visible`、禁用和加载状态。
 
-* make every card glass
-* put translucent text over noisy images
-* stack many blurred layers
-* use blur without meaningful depth
-* reduce contrast for aesthetic reasons
+## 动效
 
-Glass is a material, not a theme.
-
-## Corner radius
-
-Recommended scale:
+动效必须解释连续性、状态变化、层级、因果关系或直接操作反馈。
 
 ```text
-6 px   compact controls
-8 px   small buttons and inputs
-10 px  standard controls
-12 px  compact cards
-16 px  standard cards
-20 px  prominent panels
-24 px  large feature surfaces
-999 px capsules and circular controls
+按钮反馈          80–120 ms
+悬停/小状态变化  140–200 ms
+面板/菜单         200–300 ms
+大型空间过渡      300–450 ms
 ```
 
-Use fewer radius values per interface.
+常规过渡可使用 `cubic-bezier(0.22, 1, 0.36, 1)`。拖拽、面板回弹和手势交互可使用受控弹簧。较长动效必须可被用户输入中断。
 
-## Borders
-
-Prefer subtle separators rather than strong outlines.
-
-Example:
-
-```css
-border: 1px solid rgba(0, 0, 0, 0.08);
-```
-
-Do not add borders around every element.
-
-## Shadows
-
-Use soft, low-opacity shadows.
-
-```css
-box-shadow:
-  0 1px 2px rgba(0, 0, 0, 0.04),
-  0 8px 24px rgba(0, 0, 0, 0.08);
-```
-
-Floating overlay:
-
-```css
-box-shadow:
-  0 12px 40px rgba(0, 0, 0, 0.16),
-  0 2px 8px rgba(0, 0, 0, 0.08);
-```
-
-Avoid strong black shadows and glowing outlines.
-
----
-
-# 7. Controls
-
-## Buttons
-
-Primary button:
-
-```css
-.button-primary {
-  min-height: 44px;
-  padding: 0 20px;
-  border: 0;
-  border-radius: 999px;
-  background: var(--accent);
-  color: white;
-  font-weight: 600;
-}
-```
-
-Secondary button:
-
-```css
-.button-secondary {
-  min-height: 44px;
-  padding: 0 20px;
-  border-radius: 999px;
-  background: rgba(120, 120, 128, 0.12);
-  color: var(--text-primary);
-}
-```
-
-Use rectangular rounded buttons for toolbars and dense desktop interfaces when capsules consume too much space.
-
-Every interactive control needs:
-
-* default
-* hover
-* pressed
-* focus-visible
-* disabled
-* loading, when applicable
-
-Pressed states should usually combine slight opacity, brightness, or scale changes.
-
-## Inputs
-
-Inputs should:
-
-* have clear labels
-* retain visible focus
-* provide validation feedback
-* avoid placeholder-only labels
-* use consistent heights
-* avoid excessive borders
-
-Example:
-
-```css
-.input {
-  min-height: 44px;
-  padding: 0 14px;
-  border-radius: 10px;
-  border: 1px solid var(--border-subtle);
-  background: var(--surface-solid);
-}
-```
-
-Focus:
-
-```css
-.input:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--accent) 30%, transparent);
-  border-color: var(--accent);
-}
-```
-
-## Toggles
-
-Use toggles for immediate binary settings.
-
-Do not use a toggle when the action requires confirmation or triggers a large irreversible operation.
-
-## Segmented controls
-
-Use segmented controls for a small set of mutually exclusive views.
-
-Keep labels short. Avoid more than approximately five segments.
-
-## Menus
-
-Menus should:
-
-* be aligned to their trigger
-* use clear grouping
-* support keyboard navigation
-* distinguish destructive actions
-* close predictably
-* avoid overly wide layouts
-
----
-
-# 8. Navigation
-
-## Sidebars
-
-Use a sidebar when the product has several stable top-level destinations.
-
-Sidebar guidance:
-
-* 220–280 px on desktop
-* clear selected state
-* restrained icons
-* logical grouping
-* optional collapse behavior
-* preserve content priority
-
-Avoid excessive nested navigation.
-
-## Top bars
-
-Use top bars for:
-
-* page context
-* search
-* global actions
-* window-level controls
-* compact navigation
-
-Keep the number of visible actions small.
-
-## Tabs
-
-Use tabs for peer-level content within one context.
-
-Do not use tabs as decorative headings.
-
-## Breadcrumbs
-
-Use breadcrumbs only for genuinely hierarchical information.
-
-Do not add breadcrumbs to shallow applications.
-
----
-
-# 9. Cards and Data Presentation
-
-## Cards
-
-A card should represent a meaningful unit.
-
-Good uses:
-
-* project
-* dataset
-* document
-* experiment
-* device
-* result summary
-* actionable notification
-
-Poor uses:
-
-* every paragraph
-* every setting row
-* every chart
-* every navigation item
-* arbitrary whitespace grouping
-
-## Tables
-
-For scientific or professional software:
-
-* prioritize scanability
-* align numeric values by decimal or right edge
-* keep headers visible when scrolling
-* support sorting and filtering when needed
-* use subtle row separators
-* avoid excessive zebra striping
-* provide selected and hover states
-* allow horizontal scrolling on small screens
-
-Do not force dense datasets into oversized cards.
-
-## Charts
-
-Charts should use:
-
-* clear labels
-* restrained palettes
-* readable axes
-* meaningful tooltips
-* consistent legends
-* sufficient contrast
-* no decorative 3D effects unless scientifically necessary
-
-The interface should not imitate Apple marketing at the cost of scientific readability.
-
----
-
-# 10. Motion
-
-## Motion purpose
-
-Animation must communicate:
-
-* continuity
-* state change
-* hierarchy
-* causality
-* direct manipulation
-* feedback
-
-Do not animate merely because animation is possible.
-
-## Timing
-
-Suggested durations:
-
-```text
-80–120 ms    button feedback
-140–200 ms   hover and small state change
-200–300 ms   panels and menus
-300–450 ms   sheets and larger spatial transitions
-```
-
-## Easing
-
-For standard UI transitions:
-
-```css
-cubic-bezier(0.22, 1, 0.36, 1)
-```
-
-For entering elements:
-
-```css
-cubic-bezier(0.16, 1, 0.3, 1)
-```
-
-For exiting elements:
-
-```css
-cubic-bezier(0.4, 0, 1, 1)
-```
-
-Use spring motion for:
-
-* draggable objects
-* sheets
-* cards returning to position
-* gesture-driven interactions
-* playful but controlled feedback
-
-## Interruptibility
-
-Longer animations must be interruptible.
-
-User input should take priority over an animation already in progress.
-
-## Reduced motion
-
-Always support:
+始终支持减少动态效果，并保留必要的状态反馈：
 
 ```css
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
@@ -805,369 +193,83 @@ Always support:
 }
 ```
 
-Do not remove essential state feedback.
+## 图标、图像与数据
 
----
+- 复用项目已有的单一图标家族，保持轮廓、填充和笔画风格一致；
+- 不要把 emoji 当作主要界面图标，除非用户明确要求；
+- 图像应服务产品理解、内容层级或身份，不要用随机素材填空；
+- 表格优先保证扫描效率，数字按小数点或右侧对齐，并提供必要的排序、筛选和横向滚动；
+- 图表应有清楚标签、克制配色、可读坐标轴和有意义的提示信息；
+- 不要为了模仿 Apple 营销页面而牺牲专业或科研信息的准确性。
 
-# 11. Icons and Imagery
+## 响应式与无障碍
 
-## Icons
+移动端使用清晰的主列，收起次要导航，把低优先级操作移入菜单，并避免桌面式微小控件和页面横向溢出。平板可使用分栏、侧边栏和检查器。桌面端可提高密度并支持快捷键、悬停、上下文菜单和可调整区域。
 
-Prefer:
+无障碍是必需条件：
 
-* one consistent icon family
-* simple silhouettes
-* optical alignment
-* consistent stroke weight
-* clear active and inactive states
+- 使用语义化结构和原生控件；
+- 支持键盘导航与可见聚焦；
+- 提供可访问名称、标签和合理标题结构；
+- 为重要动态更新提供屏幕阅读器提示；
+- 保证足够对比度、触控尺寸和非颜色依赖的状态表达；
+- 不要用外观更漂亮但行为不完整的自定义控件替代成熟原生行为。
 
-For web projects, use the icon library already installed in the repository.
+## Apple 平台原生界面
 
-Do not use emoji as primary interface icons unless explicitly requested.
+实现 SwiftUI 或 Apple 平台界面时：
 
-Avoid mixing filled, outlined, hand-drawn, and multicolor icons.
+- 优先使用原生 SwiftUI 组件、导航、材质、菜单、工具栏、表单、Sheet 和 Alert；
+- 尊重安全区域、Dynamic Type、语义系统色以及浅色/深色模式；
+- 保留平台习惯，除非有充分理由，不要重造标准控件；
+- 按项目部署目标核对 API 可用性；涉及可能更新的 API 时查阅 Apple 官方文档；
+- 只在部署目标支持时使用较新的 Liquid Glass 等 API，不要虚构 Apple API。
 
-## Images
+## 科研与专业软件
 
-Use imagery only when it supports:
+Apple 风格的克制不能隐藏重要技术信息。优先保证数据可见、标签准确、参数状态明确、实验和文件上下文清楚、图表可读、工作流非破坏、进度可见、错误可恢复以及导出入口明确。
 
-* product understanding
-* content hierarchy
-* emotional tone
-* demonstration
-* identity
-
-Do not add random stock illustrations to fill empty space.
-
----
-
-# 12. Responsive Design
-
-## Mobile
-
-On small screens:
-
-* use one primary column
-* maintain touch targets of at least approximately 44 × 44 px
-* collapse secondary navigation
-* move low-priority actions into menus
-* avoid tiny desktop-style controls
-* keep primary actions reachable
-* prevent horizontal page overflow
-
-## Tablet
-
-Use tablet width for:
-
-* split views
-* sidebars
-* flexible inspector panels
-* larger touch targets
-* responsive content grids
-
-## Desktop
-
-Desktop UI may be denser, but must remain calm and legible.
-
-Support:
-
-* keyboard shortcuts
-* hover states
-* context menus when useful
-* resizable regions where appropriate
-* efficient multi-column workflows
-
-Do not turn a desktop tool into an enlarged mobile app.
-
----
-
-# 13. Accessibility
-
-Accessibility is mandatory.
-
-Ensure:
-
-* semantic HTML
-* keyboard navigation
-* visible focus states
-* sufficient contrast
-* accessible names
-* meaningful labels
-* logical heading structure
-* reduced-motion support
-* screen-reader announcements for important dynamic updates
-* touch targets large enough for reliable interaction
-* color-independent status communication
-
-Use native controls where possible.
-
-Do not replace accessible native behavior with visually attractive but incomplete custom controls.
-
----
-
-# 14. Apple-Inspired Web Design
-
-When creating an Apple-inspired website, capture these characteristics:
-
-* confident typography
-* highly focused messaging
-* generous spacing
-* simple navigation
-* premium imagery
-* smooth scroll-linked storytelling used sparingly
-* restrained color
-* clear product hierarchy
-* subtle material depth
-* precise motion
-
-Do not clone Apple pages exactly.
-
-Avoid:
-
-* copying Apple trademarks
-* copying product imagery
-* copying proprietary assets
-* copying page text
-* pretending a product is affiliated with Apple
-* reproducing the Apple website pixel-for-pixel
-
-Create an original design that uses similar design principles.
-
----
-
-# 15. Native Apple Interfaces
-
-When implementing SwiftUI or Apple-platform UI:
-
-* prefer native SwiftUI components
-* use platform-standard navigation
-* respect safe areas
-* support Dynamic Type
-* use semantic system colors
-* support light and dark mode
-* use native materials
-* use native sheets, alerts, menus, toolbars, and controls
-* avoid rebuilding standard controls without strong reason
-* preserve platform conventions
-* verify API availability for the deployment target
-
-For newer Liquid Glass APIs, only use APIs supported by the project's deployment target.
-
-Do not invent Apple APIs.
-
----
-
-# 16. Scientific and Research Software
-
-For scientific applications, combine Apple-style polish with technical clarity.
-
-Prioritize:
-
-* data visibility
-* accurate labels
-* reproducible controls
-* obvious parameter state
-* clear file and experiment context
-* readable plots
-* dense but orderly layouts
-* non-destructive workflows
-* progress feedback
-* error recovery
-* export visibility
-
-Recommended structure:
+适合复杂科研工具的结构示例：
 
 ```text
-Sidebar
-  datasets
-  experiments
-  models
-  history
-
-Main workspace
-  spectrum, image, table, or editor
-
-Inspector panel
-  parameters
-  metadata
-  preprocessing
-  model configuration
-
-Bottom/status area
-  progress
-  device status
-  logs
-  warnings
+侧边栏：数据集 / 实验 / 模型 / 历史
+主工作区：谱图 / 图像 / 表格 / 编辑器
+检查器：参数 / 元数据 / 预处理 / 模型配置
+状态区：进度 / 设备 / 日志 / 警告
 ```
 
-Use Apple visual principles without hiding important scientific details behind excessive minimalism.
+## 实现质量
 
----
+代码必须完整、可运行、响应式、可访问、可维护，并与现有项目一致。应复用设计令牌和逻辑组件，避免不必要依赖和占位 `TODO`。
 
-# 17. Anti-Patterns
+实现任务不能只交付视觉描述。不要无故重写正常业务逻辑，也不要在任务不需要时引入新框架。
 
-Reject the following unless the user explicitly asks for them:
+## 必须避免的模式
 
-* purple-blue gradient backgrounds
-* neon glow
-* excessive glassmorphism
-* floating cards everywhere
-* random blobs
-* giant hero text in application screens
-* excessive pill-shaped controls
-* icons inside every heading
-* multiple accent colors
-* excessive animation
-* tiny gray text
-* low-contrast controls
-* meaningless metrics
-* placeholder charts
-* generic SaaS dashboards
-* endless rounded rectangles
-* excessive shadows
-* decorative 3D objects
-* emojis used as interface icons
-* gradients applied to all buttons
-* hidden essential actions
-* replacing tables with cards for no reason
+除非用户明确要求，不要使用：
 
-Avoid the recognizable default “AI-generated UI” appearance.
+- 紫蓝渐变背景、霓虹发光和重度玻璃拟态；
+- 到处漂浮的卡片、随机色块和装饰性 3D 对象；
+- 应用页面中的超大 Hero 标题；
+- 过量胶囊控件、徽章、阴影、边框和动效；
+- 多个竞争性强调色；
+- 低对比小灰字；
+- 无意义指标、占位图表和通用 SaaS 仪表盘；
+- 用卡片替代表格，或隐藏关键操作；
+- 复制 Apple 商标、产品图、文案、专有资产或像素级复刻 Apple 官网；
+- 暗示原创产品与 Apple 存在并无依据的关联。
 
----
+## 最终检查
 
-# 18. Code Quality
+完成前确认：
 
-Generated code must be:
+- 主任务和主操作是否一眼可见；
+- 对齐、间距、留白、圆角和字体是否一致；
+- 内容在移动端与桌面端是否都可用；
+- 半透明、阴影和动效是否有明确作用；
+- 控件状态、键盘路径、聚焦和减少动态效果是否完整；
+- 重要含义是否不依赖颜色；
+- 是否避免了通用 AI 生成界面的惯用样式；
+- 代码是否构建或运行通过，且未破坏现有功能。
 
-* complete
-* runnable
-* responsive
-* accessible
-* maintainable
-* consistent with the existing project
-* free of unnecessary dependencies
-* separated into logical components
-* based on reusable design tokens
-* free of placeholder TODO sections unless unavoidable
-
-Do not output only a visual description when implementation is requested.
-
-Do not rewrite working business logic unnecessarily.
-
-Do not introduce a new framework unless the task requires it.
-
----
-
-# 19. Design Tokens
-
-Prefer reusable tokens.
-
-Example:
-
-```css
-:root {
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --space-10: 40px;
-  --space-12: 48px;
-  --space-16: 64px;
-
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --radius-pill: 999px;
-
-  --control-height-sm: 32px;
-  --control-height-md: 40px;
-  --control-height-lg: 44px;
-
-  --duration-fast: 120ms;
-  --duration-normal: 220ms;
-  --duration-slow: 360ms;
-
-  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
-}
-```
-
-Use project-specific tokens if they already exist.
-
----
-
-# 20. Final Review Checklist
-
-Before completing any Apple-style UI task, verify:
-
-## Product
-
-* Is the primary user goal obvious?
-* Is the main action visually clear?
-* Is unnecessary content removed?
-
-## Layout
-
-* Are alignment and spacing consistent?
-* Is whitespace intentional?
-* Are cards used only where appropriate?
-* Does the layout work at mobile and desktop widths?
-
-## Typography
-
-* Is the hierarchy obvious?
-* Is body text readable?
-* Are heading weights restrained?
-* Are line lengths reasonable?
-
-## Surfaces
-
-* Is translucency used selectively?
-* Is contrast sufficient?
-* Are shadows subtle?
-* Are corner radii consistent?
-
-## Interaction
-
-* Do controls have hover, pressed, focus, disabled, and loading states?
-* Is keyboard navigation supported?
-* Is feedback immediate?
-* Are animations purposeful and interruptible?
-
-## Accessibility
-
-* Are semantic elements used?
-* Are focus states visible?
-* Is reduced motion supported?
-* Is important meaning independent of color?
-
-## Quality
-
-* Does it avoid generic AI dashboard styling?
-* Does it feel coherent rather than decorative?
-* Is the code complete and runnable?
-* Does it preserve existing project functionality?
-
----
-
-# 21. Response Behavior
-
-When asked to create or redesign an interface:
-
-1. inspect the existing project
-2. identify the primary workflow
-3. choose one coherent design direction
-4. implement the interface
-5. run or build the project when possible
-6. inspect the rendered result
-7. correct obvious design and interaction issues
-8. summarize only the important changes
-
-Do not provide multiple weak alternatives when one strong solution is possible.
-
-Do not stop after writing a plan when implementation is requested.
-
-Do not claim the interface is polished without reviewing the rendered result.
+交付时只总结关键改动、验证结果和仍需用户确认的事项。实现已被要求时，不要停在计划阶段，也不要提供多个薄弱方向来代替一个完整方案。

@@ -1,25 +1,32 @@
-# Template layout map
+# 任组模板版式映射
 
-The bundled template contains seven example slides. Use them as layout sources, then replace all sample content.
+内置模板 `assets/RenGroup-PPT-template.pptx` 包含 10 个示例页。将它们作为版式来源，复制后替换全部示例内容。
 
-| Source slide | Intended use | Required adaptation |
+| 源页 | 用途 | 必须调整的内容 |
 |---:|---|---|
-| 1 | Cover/title slide | Replace title, presenter, and optional cover date; keep the template cover composition |
-| 2, 3, 5, 7 | Contents or section navigation | Replace every section label; highlight the current section only when useful |
-| 4 | Three-panel comparison | Replace all three figures, captions, citations, arrows, and the conclusion; preserve the template title and conclusion-frame colors |
-| 6 | One main figure with three supporting statements | Replace the figure and all text; use for a principal result, workflow, or mechanism; preserve the template title and conclusion-frame colors |
+| 1 | 封面 | 替换汇报题目、汇报人和日期；保留页眉标识、彩色分隔线和封面构图 |
+| 2 | 完整目录 | 替换全部章节名称；用于首次展示完整结构 |
+| 3、5、7、9 | 章节导航 | 替换全部章节名称；用黑色和勾选符突出当前章节，其余章节保持浅灰 |
+| 4 | 三阶段流程或三组对比 | 替换三幅图、箭头语义、要点、引文和结论；保留标题、页码和结论框样式 |
+| 6 | 左侧窄图 + 右侧三条解释 | 替换主图、三条要点和结论；适合谱图局部、装置图、单列流程或机制示意 |
+| 8 | 左侧大图/表 + 右侧三条解释 | 替换大幅图表、三条要点和结论；适合主结果、宽表、热图或综合图 |
+| 10 | 总结与展望 | 替换三条总结；可按内容改为“总结、局限、展望”，不要保留示例省略号 |
 
-## Layout selection
+## 版式选择
 
-- Use slide 4 for baseline/method comparisons, three conditions, three stages, or three related evidence panels.
-- Use slide 6 for one large spectrum, model diagram, workflow, or primary chart with interpretation beside it.
-- Duplicate layouts as needed; do not limit the final presentation to seven slides.
-- Create a new layout only when the template layouts cannot communicate the content clearly. New layouts must retain the template master, clean background, centered deep-red title, and conclusion treatment.
+- 三个条件、三个阶段、三种方法或基线/方法/结果对比使用第 4 页。
+- 单个纵向或较窄视觉对象配三条解释使用第 6 页。
+- 单个宽图、主结果、表格、热图或综合图配三条解释使用第 8 页。
+- 第 3、5、7、9 页用于章节切换，不要把浅灰项目误当作应删除的普通占位文本。
+- 第 10 页用于收束叙事，结论必须回应前文证据，不要把它变成通用“谢谢”页。
+- 可多次复制同一版式，最终汇报不限于 10 页。
+- 仅当现有版式无法清楚表达内容时才新建布局；新布局仍须保留母版、白底、顶部居中深红标题、彩色分隔线、页码和结论框体系。
 
-## Template-specific cautions
+## 模板特有注意事项
 
-- Sample `xxx`, `图1`, `图2`, `图3`, `图4`, example citations, and `结论1/2` are placeholders and must not remain.
-- The conclusion outline is a reusable template asset. Duplicate it to retain the `#C00000` outline and no-fill treatment.
-- The title placeholder spans the top of the slide. Explicitly center the final title and retain the template's `#800000` color; do not rely on an upper-left default.
-- Keep inherited slide numbers if they do not collide with the centered title.
-- Do not add a lower-left date or project-time footer to content slides.
+- 模板中的 `汇报题目`、示例汇报人、`2026.xx.xx`、`xxx`、`图1–图4`、`表格`、示例引文、省略号、`结论` 和 `总结1–3` 都是占位内容，最终稿不得残留。
+- 第 4、6、8 页的红色虚线圆角结论框是可复用资产；复制它以保留 `#C00000` 描边、2.25 pt 线宽、虚线和无填充处理。
+- 内容页标题框继承模板的 32 pt 黑体/Arial 字体映射和 `#800000` 颜色。标题框顶部略超出画布边界，编辑后必须逐页渲染，确认标题未裁切且保持单行。
+- 继承页码；若标题过长与页码冲突，应先缩短标题或换页，不能遮住页码。
+- 内容页左下角不得新增日期、项目时间或研究周期。
+- 目录页和章节导航页的浅灰文字是视觉状态的一部分；替换文字时保留当前章节与其他章节之间的层级差异。
