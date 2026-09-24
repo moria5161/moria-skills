@@ -1,5 +1,5 @@
 interface:
   display_name: "任组 PPT"
-  short_description: "使用任组模板创建规范、清晰的学术演示文稿"
+  short_description: "使用任组模板完成科学叙事、规范排版与逐页视觉质检"
   brand_color: "#800000"
-  default_prompt: "使用 $rengroup-ppt-skill 和内置任组模板创建一份规范、清晰并经过逐页质检的学术演示文稿。"
+  default_prompt: "使用 $rengroup-ppt-skill 基于任组模板完成本次学术演示文稿：先组织科学叙事，再映射模板版式，保持数据与引用准确，完成结构审计、全页渲染和修订复验后交付。"
