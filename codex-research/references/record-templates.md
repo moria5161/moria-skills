@@ -28,7 +28,7 @@
 - 迁移旧编号时保留 `旧 ID → 新语义 ID` 映射，并同步核对配置、脚本、权重/checkpoint、结果、TensorBoard、日志、manifest 和文档引用；仅做命名迁移时不得改变模型、数据、训练或评估计算。
 
 ## 文档维护合同
-- AGENTS 维护长期硬约束和项目边界；EXPERIMENTS 维护实验设计与主要结果；SUMMARY 维护全部跨会话交接、关键决定和证据入口。
+- AGENTS 维护长期硬约束和项目边界；EXPERIMENTS 维护按数据集/任务组织的统一实验与结果账本；SUMMARY 维护全部跨会话交接、关键决定和证据入口。
 - 每轮最终回复前，将新决定、理由、更正、状态变化和未解决项合并到 SUMMARY。
 - 设计、实验状态或结果变化时更新 EXPERIMENTS；底层规则或长期执行边界变化时更新 AGENTS。
 - 不创建或维护 history/YYYY-MM-DD.md；旧 history 仅作为遗留证据按需读取，不主动删除。
