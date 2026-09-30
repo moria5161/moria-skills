@@ -1,4 +1,4 @@
 interface:
   display_name: "Codex Research"
   short_description: "通用科研协作、实验验证与三文件交接"
-  default_prompt: "使用 $codex-research 按项目规则处理本次研究任务；首次接手先实际建立或补齐AGENTS.md、EXPERIMENTS.md和SUMMARY.md。AGENTS记录长期强制约束，EXPERIMENTS保持固定四模块并以表格为主体，SUMMARY承担全部跨会话交接与关键决定；核实当前事实、实验协议和授权范围，完成必要验证后同步维护对应文档。"
+  default_prompt: "使用 $codex-research 按项目规则处理本次研究任务；首次接手先实际建立或补齐AGENTS.md、EXPERIMENTS.md和SUMMARY.md。AGENTS记录长期强制约束，EXPERIMENTS固定为“研究主线 / 实验与结果 / 下一步”三模块，所有实验统一登记在按数据集和任务组织的结果表中，SUMMARY承担全部跨会话交接与关键决定；核实当前事实、实验协议和授权范围，完成必要验证后同步维护对应文档。"
